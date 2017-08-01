@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no,minimal-ui">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="robots" content="all"/>
+    <meta name="author" content="Tencent-TGideas">
+    <meta name="format-detection" content="telephone=no"/>
+	<meta charset="UTF-8">
+	<title>dom-img标签实现动画</title>
+	<style type="text/css">
+	#container{
+		width: 225px;
+		height: 225px;
+		margin: 0 auto;
+		position: relative;
+	}
+	#container>img{
+		width: 225px;
+		height: 225px;
+		position: absolute;
+		left: 0;
+		top: 0;
+	}
+	.hide{
+		opacity:0
+	}
+	</style>
+</head>
+<body>
+<div id="container">
+</div>	
+<script type="text/javascript" src="js/jquery-2.1.3.min.js"></script>
+<script type="text/javascript" src="js/DomAnima.js"></script>
+	<script type="text/javascript">
+		var html="";
+		for(var i = 1;i <= 12; i ++){
+			if( i ==1){
+				html+= '<img src="imgs/'+ i +'.png" class="index-' + i + '">'
+			}else{
+				html+= '<img src="imgs/'+ i +'.png" class="hide index-' + i + '">'
+			}
+			
+		}
+		$("#container").append(html)
+		//console.log(document.querySelector("#container>img.index-1").classList)
+
+		
+
+	    var domAnima = new DomAnima("#container",{
+	    		startDomIndex:1,
+				endDomIndex:12,
+				class:"index-",
+				isLoop:false,
+				fps:1000/12.5,
+				loopNum:1,
+				endFn:function(){alert(1)},
+				currentFn:function(i,self){
+					console.log(i)
+					if(i==5){
+						console.log("hahhah")
+					}
+				}
+			}
+	    )
+	    document.addEventListener("click",function(){
+	   		domAnima.stopFn()
+	   		setTimeout(function(){
+	   			domAnima.continue()
+	   		},5000)
+	   	})
+	    domAnima.init()
+	</script>
+</body>	
+</html>

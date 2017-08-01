@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  	<meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no,minimal-ui">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="robots" content="all"/>
+    <meta name="author" content="Tencent-TGideas">
+    <meta name="format-detection" content="telephone=no"/>
+	<meta charset="UTF-8">
+	<title>实现css背景图定位的播放</title>
+	<style type="text/css">
+		#sprites{
+			width: 127px;
+			height: 112px;
+			margin: 50px auto;
+		}
+		.sprites{
+			background:url(imgs/img.png)  no-repeat;
+			background-size:127px 1350px;
+		}
+		.sprites_9{background-position:0 -1232px;}
+		.sprites_8{background-position:0 -1120px;}
+		.sprites_7{background-position:0 -1008px;}
+		.sprites_12{background-position:0 -896px;}
+		.sprites_11{background-position:0 -784px;}
+		.sprites_10{background-position:0 -672px;}
+		.sprites_3{background-position:0 -560px;}
+		.sprites_2{background-position:0 -448px;}
+		.sprites_1{background-position:0 -336px;}
+		.sprites_6{background-position:0 -225px;}
+		.sprites_5{background-position:0 -112px;}
+		.sprites_4{background-position:0 -0px;}
+	</style>
+</head>
+<body>
+	<div id ="sprites" class="sprites sprites_1"></div>
+	<script type="text/javascript" src="js/SpriteAnima.js"></script>
+	<script type="text/javascript">
+	    var sprites = new SpritesAnima("sprites",{
+	    		startSpritesIndex:1,
+	    		endSpritesIndex:12,
+	    		class:"sprites_",
+	    		isLoop:false,
+	    		fps:1000/12.5,
+	    		loopNum:1,
+	    		endFn:endFn,
+	    		currentFn:function(i,self){
+	    			console.log(i)
+	    			if(i==5){
+	    				console.log("hahha")
+	    			}
+	    		}
+	    })
+	  
+	    function endFn(){
+	    	alert(1)
+	    }
+	   	document.addEventListener("click",function(){
+	   		sprites.stopFn()
+	   		setTimeout(function(){
+	   			sprites.continue()
+	   		},5000)
+	   	})
+	   	sprites.init()
+	</script>
+</body>
+</html>
